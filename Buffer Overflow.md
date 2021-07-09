@@ -3,11 +3,15 @@
 
 ## Buffer Overflow - Windows
 
+## **Netcat can be used to find segmenatation fault and crash...**
+
 1. Set working folder for mona.
 
 **!mona config -set workingfolder c:\mona\%p**
   
 2. Fuzz number of bytes until application crashed.
+
+**!mona findmsp -distance <> **
 
 import socket, time, sys
 
