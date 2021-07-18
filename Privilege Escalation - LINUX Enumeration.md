@@ -52,6 +52,12 @@
 12. Finding specific folder
 `find / -type d -name "dir-name-here" 2>/dev/null`
 
+13. Look for user capabilities 
+
+```
+getcap -r / 2>/dev/null
+```
+
 10. Port-Forwarding or SSH Tunneling
 
  a. ./chisel client 10.10.14.21:8080 R:631:127.0.0.1:631 -- target machine
