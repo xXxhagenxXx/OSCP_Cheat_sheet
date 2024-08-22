@@ -3,6 +3,7 @@
 
 1. In privilege escalation, check if we can poison imported libraries for binaries and scripts that are run by root.
 2. If you can't make the script work always use the  virtualenv.
+
 ```
 python3 -m pip install virtualenv
 python3 -m virtualenv impkt
@@ -11,25 +12,23 @@ source impkt/bin/activate
 pip install git+https://github.com/SecureAuthCorp/impacket
 
 ```
-3. 
-``
-5. For foothold, if there are only php files such as login,home,logout,profile etc., look for directory traversal, LFI and RFI.
-7. Look for /etc/knockd.conf when directory traversal, LFI or RFI exist.
-8. After getting low priv shell, check for config.php, databases, sql file for user credentials.
-9. Comparing files use comm <fileA> <fileB>
-10. ALWAYS RUN MSFCONSOLE to SUDO for portfwd purposes.
-11. In a local file inclusion always try to read the disable function under php.ini, e.g. (/etc/php.ini) or (/etc/php/7.2/apache2/php.ini)
+4. For foothold, if there are only php files such as login,home,logout,profile etc., look for directory traversal, LFI and RFI.
+5. Look for /etc/knockd.conf when directory traversal, LFI or RFI exist.
+6. After getting low priv shell, check for config.php, databases, sql file for user credentials.
+7. Comparing files use comm <fileA> <fileB>
+8. ALWAYS RUN MSFCONSOLE to SUDO for portfwd purposes.
+9. In a local file inclusion always try to read the disable function under php.ini, e.g. (/etc/php.ini) or (/etc/php/7.2/apache2/php.ini)
 	__*NOTE: backticks on php can execute commands(e.g. echo `whoami`)*__
-8. test for web apps:
+10. test for web apps:
 	- < >
 	- ' 
 	- "
 	- { }
     - ;
-9. Execution of the powershell script after compromising the server.
+11. Execution of the powershell script after compromising the server.
 ```powershell -ExecutionPolicy Bypass -File <file.ps1>```
 	
-10. Wordpress Exploitation
+12. Wordpress Exploitation
 	
 `wpscan --url http://10.11.1.234/ --enumerate u`
 `wpscan --url http://10.11.1.234/ --passwords /usr/share/wordlists/rockyou.txt`	
