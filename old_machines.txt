@@ -1,0 +1,6 @@
+# RESOURCE
+[Linux elevation of privileges (guif.re)](https://guif.re/linuxeop)
+
+[Rooted, Nick reverse shell Hint Plus need Help for Nicky privilege Escalation (offensive-security.com)](https://forums.offensive-security.com/showthread.php?31995-Rooted-Nick-reverse-shell-Hint-Plus-need-Help-for-Nicky-privilege-Escalation)
+[For those doubting this box is up ::SPOILERS:: (offensive-security.com)](https://forums.offensive-security.com/showthread.php?35437-For-those-doubting-this-box-is-up-SPOILERS)
+[Mozilla Firefox 4.0.1 - 'Array.reduceRight()' Remote Overflow - Windows remote Exploit (exploit-db.com)](https://www.exploit-db.com/exploits/18531)
