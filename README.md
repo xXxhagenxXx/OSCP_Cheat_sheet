@@ -250,7 +250,7 @@ except:
 	
 	## Dirty COW
 	
-	```
+```
 	/*
 * A PTRACE_POKEDATA variant of CVE-2016-5195
 * should work on RHEL 5 & 6
@@ -381,7 +381,6 @@ int main(int argc,char *argv[]){
     }
   return 0;
 }
-
-	```
+```
 
    
