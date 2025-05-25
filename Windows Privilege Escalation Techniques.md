@@ -365,4 +365,13 @@ powershell.exe -exec bypass -Command “& {Import-Module .\PowerUp.ps1; Invoke-A
 
 ```
 
+## Change Configr
+
+```PowerShell
+sc config WCAssistantService obj= “.\LocalSystem” password= “”
+sc config WCAssistantService start= “demand”
+
+
+Set-Service -Name "WCAssistantService" -StartupType Manual
+```
 
